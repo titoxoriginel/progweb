@@ -1,4 +1,5 @@
 import express from 'express';
+import morgan from 'morgan';
 
 const host = 'localhost';
 const port = 8080;
@@ -26,3 +27,5 @@ app.use(function(req, res){
 app.listen(port, host, () => {
     console.log(`Server is running on http://${host}:${port}`)
 });
+
+app.use(morgan('combined'));
