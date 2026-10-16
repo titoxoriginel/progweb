@@ -3,3 +3,17 @@
 
 
 GET http://localhost:8080/
+
+###
+
+POST http://localhost:8080/contacts 
+Content-Type: application/json
+
+{
+  "name": "Alice",
+  "age": 30
+}
+###
+
+GET http://localhost:8080/add/
+

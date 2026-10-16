@@ -1,0 +1,7 @@
+### Get all contacts
+GET http://localhost:8080/contacts
+
+
+### Get a contact by ObjectId
+GET http://localhost:8080/contacts/{id}
+
