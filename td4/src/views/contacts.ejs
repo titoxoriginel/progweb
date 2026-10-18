@@ -1,0 +1,22 @@
+<% contacts.forEach(contact => { %>
+  Nom : <%= contact.name %>, Age : <%= contact.age %>, Id : <%= contact._id %><br>
+<% }) %>
+
+<br><hr><br>
+
+Ajouter un contact : <br>
+<form method="POST" action="/contacts/add">
+  <input type="text" name="name" placeholder="Nom">
+  <input type="number" name="age" placeholder="Age">
+  <button type="submit">Ajouter</button>
+</form>
+
+
+<br><hr><br>
+
+
+Supprimer un contact : <br>
+<form method="POST" action="/contacts/delete">
+  <input type="text" name="id" placeholder="ID du contact">
+  <button type="submit">Supprimer</button>
+</form>

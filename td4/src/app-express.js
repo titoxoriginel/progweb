@@ -42,12 +42,16 @@ app.get('/user/:uid', function (req, res) {
 app.get('/contacts', async function (req, res) {
   const contacts = await db.collection('contacts').find().toArray();
   console.log(contacts);
+  res.render('contacts', { contacts });
+  /*
   let tmp = '';
   contacts.forEach(contact => {
     tmp += `Nom : ${contact.name}, Age : ${contact.age}, Id : ${contact._id}<br>`;
   });
-  res.send(tmp);
+  res.send(tmp);*/
 });
+
+
 
 
 
@@ -67,7 +71,7 @@ app.get('/contacts/:id', async function (req, res) {
   }
 });
 
-app.post('/contacts', async function (req, res) {
+app.post('/contacts/add', async function (req, res) {
   const { name, age } = req.body;
   if (!name || !age) {
     return res.status(400).send('Name and age are required');
@@ -76,10 +80,25 @@ app.post('/contacts', async function (req, res) {
   console.log('Contacts collection:', db.collection('contacts'));
   const result = await db.collection('contacts').insertOne({ name, age });
   console.log('Result of insertOne:', result.insertedId);
-  res.redirect(`/contacts/${result.insertedId}`);
+  //res.redirect(`/contacts/${result.insertedId}`);
+  res.redirect(`/contacts`);
+
 });
 
-
+app.post('/contacts/delete', async function (req, res) {
+  const { id } = req.body;
+  if (!id || !ObjectId.isValid(id)) {
+    return res.status(400).send('Invalid contact id');
+  }
+  console.log(`Deleting contact with id: ${id}`);
+  const result = await db.collection('contacts').deleteOne({ _id: new ObjectId(id) });
+  if (result.deletedCount === 1) {
+    res.redirect(`/contacts`);
+    //res.send(`Contact with id ${id} deleted`);
+  } else {
+    res.status(404).send('Contact not found');
+  }
+});
 
 
 app.use(function (req, res) {
