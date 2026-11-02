@@ -1,0 +1,89 @@
+npm run start
+npm run dev
+docker build -t web : creer l'image du conteneur avec le nom web
+docker run web : execute le conteneur web
+
+stop plus gentil que kill, il envoie un signal SIGTERM au conteneur pour lui demander de s'arrêter proprement
+docker stop idweb : stop le conteneur web à partir de son id
+docker kill idweb : kill le conteneur web à partir de son id
+
+
+docker build --help
+
+dockerFIle : fichier qui decrit l'image d'un contenteur
+
+COPY : rep courant vers le WORKING DIRECTORY
+
+EXPOSE : exposer un port, le rendre le port du conteneur pour qu'il soit visible depuis l'exterieur
+
+je lance un conteneur pour qu'il execute quelque chose
+CMD : execute les commandes suivantes
+
+&x&cuter plusieurs commandes
+faire un script .sh et dans docker CMD appeler le script sh
+CMD ["sh", "script.sh"]
+
+docker pssède un système de cache, si on ne change pas le dockerfile, 
+il ne va pas reconstruire l'image
+
+dockerignore : tous les fichiers et dossiers à ignorer lors de la construction de l'image
+
+docker ps : liste les conteneurs en cours d'execution
+docker run -p 1234:80 web : rediriger le port 80 du conteneur vers le port 1234 de l'ordinateur hôte
+docker run -p 1234:80 -d web : rediriger le port
+
+
+docker rm idweb : supprime le conteneur web à partir de son id
+docker rmi web : supprime l'image web
+docker rmi idimage : supprime l'image à partir de son id
+docker rmi -f idimage : supprime l'image à partir de son id, même si elle est utilisée par un conteneur
+docker rmi -f $(docker images -a -q) : supprime toutes les images, même celles qui sont utilisées par un conteneur
+
+
+
+docker images -a : liste toutes les images, y compris celles qui ne sont pas taguées
+
+Creer un compte sur docker hub : https://hub.docker.com/signup
+docker run gblin/bob : recupere l'image gblin/bob depuis le docker hub et execute le conteneur
+
+docker pull url:image : recupere l'image depuis le docker hub et la stocke sur l'ordinateur hôte
+docker push url:image : envoie l'image vers le docker hub
+
+docker run -it --rm gblin/bob /bin/sh : execute le conteneur web en mode interactif et supprime le conteneur à la fin de l'execution
+docker run -it : execute le conteneur web en mode interactif
+
+
+docker run -d -p 1234:80 web 
+docker exec : execute une commande dans un conteneur en cours d'execution
+docker exec -it idWeb sh : execute le conteneur web en mode interactif et ouvre un shell dans le conteneur
+
+node --watch
+à cause du watch si on fait des modifications dans le code, le conteneur va se relancer automatiquement
+
+
+
+-v c'est un chemin
+
+Volumes Bind Mounts
+accorde des droits d'ecriture à un dossier de l'ordinateur hôte pour que les modifications soient visibles dans le conteneur
+Mount : permet de monter un dossier de l'ordinateur hôte dans le conteneur, pour que les modifications soient visibles dans le conteneur
+docker run -v /home/user/monprojet:/app web : monte le dossier /home/user/monprojet de l'ordinateur hôte dans le conteneur web, dans le dossier /app du conteneur
+docker run -v /home/user/monprojet:/app -p 1234:80 web : monte le dossier /home/user/monprojet de l'ordinateur hôte dans le conteneur web, dans le dossier /app du
+
+à l'inverse 
+docker exec -it idWeb sh : execute le conteneur web en mode interactif et ouvre un shell dans le conteneur
+si on fait des modifications dans le code du conteneur, elles seront visibles dans l'ordinateur hôte
+
+l'un creer un volume
+
+
+
+TP NOTE 
+- modifier le dockerfile
+- modifier le  docker compose
+- executer quelques commandes liée à docker (mais tres peu et des choses simples, normalement pas de volume)
+- droit à la complétion de copilot mais pas le droit au chat ni au inline chat sinon 0
+- ils vont check les logs de si ya des requetes chat et vont nous niquer 
+- et pas le droit à nos documents
+
+
