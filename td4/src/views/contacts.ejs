@@ -20,3 +20,13 @@ Supprimer un contact : <br>
   <input type="text" name="id" placeholder="ID du contact">
   <button type="submit">Supprimer</button>
 </form>
+
+<br><hr><br>
+
+Modifier un contact : <br>
+<form method="POST" action="/contacts/update">
+  <input type="text" name="id" placeholder="ID du contact">
+  <input type="text" name="name" placeholder="Nouveau nom">
+  <input type="number" name="age" placeholder="Nouvel âge">
+  <button type="submit">Modifier</button>
+</form>

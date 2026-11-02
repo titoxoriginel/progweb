@@ -6,6 +6,7 @@ process.loadEnvFile();
 const host = process.env.HOST;
 const port = process.env.PORT;
 const client = new MongoClient(process.env.MONGODB_URI);
+/** @type {import('mongodb').Db} */
 let db;
 const app = express();
 
@@ -99,6 +100,27 @@ app.post('/contacts/delete', async function (req, res) {
     res.status(404).send('Contact not found');
   }
 });
+
+app.post('/contacts/update', async function (req, res) {
+  const { name, id, age } = req.body;
+  if (!id || !ObjectId.isValid(id)) {
+    return res.status(400).send('Invalid contact id');
+  }
+  if (!name || age === undefined) {
+  return res.status(400).send('Name and age are required');
+}
+  console.log(`Updating contact with id: ${id}`);
+  const result = await db.collection('contacts').updateOne(
+    { _id: new ObjectId(id) },
+    { $set: { name, age } }
+  );
+  if (result.matchedCount === 1) {
+    res.redirect(`/contacts`);
+  } else {
+    res.status(404).send('Contact not found');
+  }
+});
+
 
 
 app.use(function (req, res) {
