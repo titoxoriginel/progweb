@@ -2,6 +2,7 @@ npm run start
 npm run dev
 docker build -t web : creer l'image du conteneur avec le nom web
 docker run web : execute le conteneur web
+docker run -d web : execute le conteneur web en arrière plan, ne mode démon
 
 stop plus gentil que kill, il envoie un signal SIGTERM au conteneur pour lui demander de s'arrêter proprement
 docker stop idweb : stop le conteneur web à partir de son id
@@ -39,8 +40,9 @@ docker rmi idimage : supprime l'image à partir de son id
 docker rmi -f idimage : supprime l'image à partir de son id, même si elle est utilisée par un conteneur
 docker rmi -f $(docker images -a -q) : supprime toutes les images, même celles qui sont utilisées par un conteneur
 
+docker build . -t web : creer l'image du conteneur avec le nom web à partir du dockerfile dans le dossier courant
 
-
+docker images : liste toutes les images
 docker images -a : liste toutes les images, y compris celles qui ne sont pas taguées
 
 Creer un compte sur docker hub : https://hub.docker.com/signup
@@ -65,6 +67,8 @@ node --watch
 -v c'est un chemin
 
 Volumes Bind Mounts
+repertoire partagé entre l'ordinateur hôte et le conteneur
+gardé donné apres la supression du conteneur
 accorde des droits d'ecriture à un dossier de l'ordinateur hôte pour que les modifications soient visibles dans le conteneur
 Mount : permet de monter un dossier de l'ordinateur hôte dans le conteneur, pour que les modifications soient visibles dans le conteneur
 docker run -v /home/user/monprojet:/app web : monte le dossier /home/user/monprojet de l'ordinateur hôte dans le conteneur web, dans le dossier /app du conteneur

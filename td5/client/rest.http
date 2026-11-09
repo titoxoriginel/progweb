@@ -3,3 +3,31 @@ GET http://localhost:5000/
 
 ### Default API URL
 GET http://localhost:5000/api/
+
+### Contacts API
+GET http://localhost:5000/api/contacts
+
+### (getContactById)
+GET http://localhost:5000/api/contacts/6ac8ae5a7cf30af08dd0a170
+
+### (addContact)
+POST http://localhost:5000/api/contacts/
+Content-Type: application/json
+
+{
+    "name": "Alice Dupont",
+    "age": 31
+}
+
+### (updateContact)
+PUT http://localhost:5000/api/contacts/6af1fb9e891a5a4a73f33fbd
+Content-Type: application/json
+
+{
+    "name": "Bob Martin",
+    "age": 56
+}
+
+
+### (removeContact)
+DELETE http://localhost:5000/api/contacts/6af1f8e6f8b6f5f840eb74c3
