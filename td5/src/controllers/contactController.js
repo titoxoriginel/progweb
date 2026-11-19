@@ -4,7 +4,6 @@ import Contact from '../models/contactModel.js';
 export async function getAllContacts() {
     let total = await Contact.countDocuments({});
     let limit = parseInt(total);
-
     try {
         const contacts = await Contact.find().limit(limit);
         return {
@@ -20,8 +19,6 @@ export async function getAllContacts() {
 // Get contact by Id
 export async function getContactById(id) {
   let total = await Contact.countDocuments({});
-  let limit = parseInt(total);
-
   try {
       const contact = await Contact.findById(id).limit(limit);
       return {
@@ -37,8 +34,6 @@ export async function getContactById(id) {
 // Add a new contact, returns the added contact
 export async function addContact(body) {
   let total = await Contact.countDocuments({});
-  let limit = parseInt(total);
-
   try {
       const contact = await Contact.create(body);
       return {
@@ -54,13 +49,12 @@ export async function addContact(body) {
 // Update an existing contact
 export async function updateContact(id, name = null, age = null) {
    let total = await Contact.countDocuments({});  
-   let limit = parseInt(total);
-
    try{
-    const contatct = await Contact.findByIdAndUpdate(id, { name, age }, { new: true });
+    const contact = await Contact.findByIdAndUpdate(id, { name, age }, { new: true });
+     
     return {
         success: true,
-        data: contatct,
+        data: contact,
         total: total.toString(),
     }
     }   catch (err) {
@@ -71,7 +65,6 @@ export async function updateContact(id, name = null, age = null) {
 // Remove an existing contact
 export async function removeContact(id) {
   let total = await Contact.countDocuments({});
-  let limit = parseInt(total);
   try{ 
     const contact = await Contact.findByIdAndDelete(id);
     return {

@@ -35,7 +35,8 @@ const options = {
         },
         servers: [
             {
-                url: `http://${host}:${port}/api`,
+                // url: `http://${host}:${port}/api`,
+                url: '/api',
                 description: 'Development server',
             },
         ],
